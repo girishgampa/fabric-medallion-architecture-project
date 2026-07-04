@@ -123,5 +123,65 @@ Always inspect sample data before parsing timestamps.
 
 - Compared timestamps instead of dates.
 
+
+# Gold Layer Lessons
+
+## Data Modeling
+
+- Difference between Fact and Dimension tables.
+- Importance of defining the grain before building a fact table.
+- Difference between Natural Keys and Surrogate Keys.
+- Composite keys are used when one column cannot uniquely identify a record.
+
+---
+
+## Star Schema
+
+Learned how to design a Star Schema for reporting.
+
+Dimensions
+
+- Customer
+- Product
+- Seller
+- Category
+- Geography
+- Date
+
+Facts
+
+- Sales
+- Payments
+- Reviews
+
+---
+
+## Data Warehouse Concepts
+
+- Fact tables store measurable business events.
+- Dimension tables store descriptive attributes.
+- Gold layer focuses on business modeling rather than data transformation.
+
+---
+
+## Validation
+
+Performed validation for
+
+- Row Counts
+- Primary Keys
+- Business Keys
+- Referential Integrity
+- Data Types
+
+---
+
+## Best Practices
+
+- Keep ZIP Codes as String because they are identifiers.
+- Perform datatype conversions in Silver, not Gold.
+- Keep Gold tables business-ready.
+- Validate data before reporting.
+
 Lesson:
 Business rules are often different from technical implementations.
