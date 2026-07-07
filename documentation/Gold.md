@@ -59,12 +59,12 @@ Dimension tables provide descriptive attributes used for filtering, grouping, an
 
 The Customer Dimension stores customer-related information required for customer segmentation and geographical analysis.
 
-# Column	Description
+Column	Description
 customer_id	Unique customer identifier
 customer_city	Customer city
 customer_state	Customer state
 
-# Purpose
+Purpose
 
 Analyze sales by customer location
 Customer segmentation
@@ -73,7 +73,7 @@ Power BI slicers and filters
 
 The Product Dimension contains descriptive information about products.
 
-# Column	Description
+Column	Description
 product_id	Unique product identifier
 product_category_name	Product category
 product_description_length	Description length
@@ -83,7 +83,7 @@ product_length_cm	Product length
 product_height_cm	Product height
 product_width_cm	Product width
 
-# Purpose
+Purpose
 
 Product analysis
 Product performance reporting
@@ -92,24 +92,24 @@ Revenue by product/category
 
 Stores English translations for product categories.
 
-# Column	Description
+Column	Description
 product_category_name	Original category
 product_category_name_english	English category
 
-# Purpose
+Purpose
 
 Improve report readability
 Business-friendly category names
 4. dim_seller
 
-# Contains seller information.
+Contains seller information.
 
 Column	Description
 seller_id	Unique seller identifier
 seller_city	Seller city
 seller_state	Seller state
 
-# Purpose
+Purpose
 
 Seller performance analysis
 Revenue by seller location
@@ -127,7 +127,7 @@ month_name	Month abbreviation
 quarter	Quarter
 year	Year
 
-# Purpose
+Purpose
 
 Monthly revenue trends
 Year-over-Year analysis
@@ -164,7 +164,7 @@ order_delivered_customer_date	Customer delivery date
 order_estimated_delivery_date	Estimated delivery date
 shipping_limit_date	Shipping deadline
 
-Business Purpose
+# Business Purpose
 
 Revenue analysis
 Sales KPIs
@@ -178,7 +178,7 @@ Stores payment transaction information for each order.
 
 Design Note: This table remains independent from fact_sales because a single order can contain multiple payment transactions. Connecting both fact tables would create a many-to-many relationship, so payment analysis is performed as a standalone fact table.
 
-# Column	Description
+Column	Description
 order_id	Order identifier
 payment_sequential	Payment sequence
 payment_type	Payment method
