@@ -28,7 +28,6 @@ Dimension Tables
 - dim_product
 - dim_seller
 - dim_category
-- dim_geography
 - dim_date
 
 Fact Tables
@@ -156,98 +155,89 @@ The **Date Dimension** supports time intelligence and date-based reporting.
 
 ---
 
-# Fact Tables
+## 1. fact_sales
 
-Fact tables store measurable business transactions used for KPIs and analytical reporting.
+The **Sales Fact Table** is the central fact table in the Gold layer.
+
+Each record represents **one order item**, making it the primary source for sales, customer, product, delivery, and review analytics.
 
 ---
 
-## 1. fact_sales
-
-The **Sales Fact Table** is the central fact table in the warehouse.
-
-Each record represents **one order item**, making it the primary table for sales analytics.
-
-### Key Columns
+### Primary Keys
 
 | Column | Description |
 |---------|-------------|
-| order_id | Order identifier |
-| order_item_id | Order item number |
+| order_id | Unique order identifier |
+| order_item_id | Unique order item identifier |
 | customer_id | Customer identifier |
 | product_id | Product identifier |
 | seller_id | Seller identifier |
-| order_purchase_timestamp | Purchase timestamp |
-| order_purchase_date | Purchase date |
-| order_status | Original order status |
-| delivery_status | Formatted delivery status |
-| price | Product price |
-| freight_value | Shipping cost |
-| total_item_cost | Total item cost (Price + Freight) |
-| avg_review_score | Average review score per order |
-| review_count | Number of reviews |
-| order_approved_at | Approval timestamp |
-| order_delivered_carrier_date | Carrier delivery date |
-| order_delivered_customer_date | Customer delivery date |
-| order_estimated_delivery_date | Estimated delivery date |
-| shipping_limit_date | Shipping deadline |
-
-### Business Purpose
-
-- Revenue analysis
-- Sales KPIs
-- Customer analytics
-- Product analytics
-- Delivery performance
-- Review analysis
 
 ---
 
-## 2. fact_payments
+### Order Information
 
-The **Payments Fact Table** stores payment transaction information.
+| Column | Description |
+|---------|-------------|
+| order_purchase_timestamp | Date and time when the order was placed |
+| order_purchase_date | Date component of the purchase timestamp |
+| order_status | Original order status from the source system |
+| order_approved_at | Date and time when the order was approved |
+
+---
+
+### Sales Metrics
+
+| Column | Description |
+|---------|-------------|
+| price | Product selling price |
+| freight_value | Shipping cost charged for the order item |
+| total_item_cost | Total cost of the order item (Price + Freight) |
+
+---
+
+### Delivery Information
+
+| Column | Description |
+|---------|-------------|
+| shipping_limit_date | Deadline for the seller to ship the order |
+| order_delivered_carrier_date | Date and time the carrier received the order |
+| order_delivered_customer_date | Date and time the customer received the order |
+| order_estimated_delivery_date | Estimated delivery date provided at purchase |
+| delivery_status | Current delivery status of the order |
+| delivery_days | Number of days taken for delivery |
+| delivery_performance | Delivery performance classification (Early, On Time, Late, Not Delivered) |
+
+---
+
+### Customer Review Metrics
+
+| Column | Description |
+|---------|-------------|
+| avg_review_score | Average customer review score for the order |
+| review_count | Total number of reviews received for the order |
+
+---
+
+### Business Purpose
+
+The **fact_sales** table is the primary analytical fact table used throughout the project. It combines sales transactions with delivery and customer review metrics to support comprehensive business reporting.
+
+It enables analysis of:
+
+- Revenue and sales performance
+- Customer purchasing behavior
+- Product performance
+- Seller performance
+- Delivery efficiency
+- Customer satisfaction
+- Executive KPI reporting
 
 > **Design Note**
 >
-> This table remains independent from `fact_sales` because a single order can contain multiple payment transactions. Connecting both fact tables would introduce a many-to-many relationship, so payment analytics are performed separately.
+> Customer review metrics (`avg_review_score` and `review_count`) were aggregated into `fact_sales` to simplify reporting and reduce unnecessary joins. The original `fact_reviews` table is retained in the semantic model for future analysis but is hidden from report view.
 
-| Column | Description |
-|---------|-------------|
-| order_id | Order identifier |
-| payment_sequential | Payment sequence |
-| payment_type | Payment method |
-| payment_installments | Number of installments |
-| payment_value | Payment amount |
 
-### Business Purpose
-
-- Payment method distribution
-- Installment analysis
-- Payment reporting
-
----
-
-## 3. fact_reviews
-
-The **Reviews Fact Table** stores customer review information.
-
-Although review metrics are aggregated into `fact_sales` for interactive reporting, the original review fact table is retained for detailed review analysis.
-
-| Column | Description |
-|---------|-------------|
-| review_id | Review identifier |
-| order_id | Order identifier |
-| review_score | Customer rating |
-| review_creation_date | Review creation date |
-| review_answer_timestamp | Seller response timestamp |
-
-### Business Purpose
-
-- Customer satisfaction analysis
-- Review trends
-- Review quality reporting
-
----
 
 # Star Schema
 
