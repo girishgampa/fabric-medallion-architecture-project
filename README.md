@@ -16,7 +16,7 @@ The solution follows industry best practices for data ingestion, transformation,
 
 ## 🏗️ Architecture
 
-![Architecture](screenshots/architecture/Architecture.png)
+![Architecture](screenshots/Architecture.png)
 
 ### Data Flow
 
@@ -187,7 +187,7 @@ Provides insights into:
 - Sales Trends
 - Product Categories
 
-![Sales Dashboard](screenshots/dashboards/Sales_Dashboard.png)
+![Sales Dashboard](screenshots/Sales_Dashboard.png)
 
 ---
 
@@ -201,7 +201,7 @@ Provides operational insights including:
 - Seller Performance
 - Delivery Status
 
-![Operations Dashboard](screenshots/dashboards/Operations_Dashboard.png)
+![Operations Dashboard](screenshots/Operations_Dashboard.png)
 
 ---
 
