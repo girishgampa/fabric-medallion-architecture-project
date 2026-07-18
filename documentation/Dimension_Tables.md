@@ -1,157 +1,113 @@
 # Dimension Tables
 
-## dim_customer
+## Overview
 
-Purpose:
-Stores customer information used for customer segmentation and geographical analysis.
+Dimension tables contain descriptive attributes that provide context for business metrics stored in fact tables. They are used for filtering, grouping, and slicing data in Power BI reports.
 
-Grain:
-One row per customer.
-
-Primary Key:
-customer_id
-
-Columns
-
-- customer_id
-- customer_unique_id
-- customer_zip_code_prefix
-- customer_city
-- customer_state
-
-Business Questions
-
-- Customers by State
-- Customers by City
-- Repeat Customers
+The project follows a Star Schema design, where dimension tables are connected to the central `fact_sales` table.
 
 ---
 
-## dim_product
+# Dimension Tables
 
-Purpose:
+## 1. dim_customer
+
+Stores customer information used for customer and geographical analysis.
+
+| Column | Description |
+|---------|-------------|
+| customer_id | Unique customer identifier |
+| customer_city | Customer city |
+| customer_state | Customer state |
+
+**Business Use Cases**
+
+- Sales by state
+- Sales by city
+- Customer segmentation
+
+---
+
+## 2. dim_product
+
 Stores descriptive information about products.
 
-Grain:
-One row per product.
+| Column | Description |
+|---------|-------------|
+| product_id | Unique product identifier |
+| product_category_name | Product category |
+| product_description_length | Product description length |
+| product_photos_qty | Number of product images |
+| product_weight_g | Product weight (grams) |
+| product_length_cm | Product length (cm) |
+| product_height_cm | Product height (cm) |
+| product_width_cm | Product width (cm) |
 
-Primary Key:
-product_id
+**Business Use Cases**
 
-Columns
-
-- product_id
-- product_category_name
-- product_name_lenght
-- product_description_lenght
-- product_photos_qty
-- product_weight_g
-- product_length_cm
-- product_height_cm
-- product_width_cm
-
-Business Questions
-
-- Top Selling Products
-- Revenue by Category
-- Product Size Analysis
-- Product Weight Analysis
+- Product performance
+- Category analysis
+- Product characteristics
 
 ---
 
-## dim_seller
-
-Purpose:
-Stores seller information.
-
-Grain:
-One row per seller.
-
-Primary Key
-
-seller_id
-
-Columns
-
-- seller_id
-- seller_zip_code_prefix
-- seller_city
-- seller_state
-
-Business Questions
-
-- Top Sellers
-- Revenue by Seller
-- Sellers by State
-
----
-
-## dim_category
-
-Purpose
+## 3. dim_category
 
 Maps Portuguese product categories to English.
 
-Grain
+| Column | Description |
+|---------|-------------|
+| product_category_name | Original category name |
+| product_category_name_english | English category name |
 
-One row per category.
+**Business Use Cases**
 
-Primary Key
-
-product_category_name
-
-Columns
-
-- product_category_name
-- product_category_name_english
+- Business-friendly reporting
+- Category filtering
 
 ---
 
-## dim_geography
+## 4. dim_seller
 
-Purpose
+Stores seller information.
 
-Stores geographical information.
+| Column | Description |
+|---------|-------------|
+| seller_id | Unique seller identifier |
+| seller_city | Seller city |
+| seller_state | Seller state |
 
-Grain
+**Business Use Cases**
 
-One row per geographical location.
-
-Columns
-
-- geolocation_zip_code_prefix
-- geolocation_city
-- geolocation_state
-- geolocation_lat
-- geolocation_lng
-
-Business Questions
-
-- Sales by State
-- Sales by City
-- Customer Distribution
+- Seller performance
+- Sales by seller location
 
 ---
 
-## dim_date
+## 5. dim_date
 
-Purpose
+Supports time intelligence and trend analysis.
 
-Provides calendar attributes for time intelligence.
+| Column | Description |
+|---------|-------------|
+| date | Calendar date |
+| day | Day of month |
+| day_name | Day name |
+| week | Week number |
+| month | Month number |
+| month_name | Month name |
+| quarter | Quarter |
+| year | Year |
 
-Columns
+**Business Use Cases**
 
-- Date
-- Day
-- Month
-- Month Name
-- Quarter
-- Year
-- Week
-- Day Name
+- Monthly sales
+- Quarterly trends
+- Year-over-Year analysis
+- Time filtering
 
-Business Questions
+---
 
-- Monthly Sales
-- Quarterly Sales
-- Yearly Trends
+# Summary
+
+The Gold layer contains five dimension tables that provide descriptive attributes for reporting and analytical queries. These dimensions enable flexible filtering, grouping, and drill-down capabilities in Power BI dashboards.
