@@ -1,3 +1,7 @@
+[⬅ Back to main project](../README.md)
+
+# Architecture
+...
 # Architecture
 
 This folder contains the architectural design and supporting documentation for the **DP700 Microsoft Fabric Analytics Project**.
