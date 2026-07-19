@@ -191,7 +191,7 @@ Provides insights into:
 - Sales Trends
 - Product Categories
 
-![Sales Dashboard](screenshots/Sales_Dashboard.png)
+![Sales Dashboard Demo](screenshots/Sales_Dashboard_Demo.gif)
 
 ---
 
